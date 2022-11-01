@@ -1,8 +1,16 @@
 img {
-  width: 100%;
+  max-width: 345px;
 }
 
 header {
   color: white;
   background-color: #562b81;
+}
+
+.textinput * {
+  width: 100%;
+}
+
+.savebutton {
+  width: 60px;
 }
