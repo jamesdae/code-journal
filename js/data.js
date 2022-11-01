@@ -6,8 +6,3 @@ var data = {
   editing: null,
   nextEntryId: 1
 };
-
-window.addEventListener('beforeunload', function () {
-  var formJSON = JSON.stringify(data);
-  localStorage.setItem('javascript-local-storage', formJSON);
-});

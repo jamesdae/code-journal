@@ -16,3 +16,7 @@ header {
   background-color: #562b81;
   color: white;
 }
+
+#notesinput {
+  height: 100px;
+}

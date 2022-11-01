@@ -32,3 +32,15 @@
     width: 50%;
   }
 }
+
+.boxes {
+  display: flex;
+  flex-direction: column;
+  flex-basis: calc(100% / 3);
+  justify-content: space-between;
+}
+
+.textonimageright {
+  display: flex;
+  flex-direction: column;
+}
