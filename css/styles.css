@@ -7,16 +7,43 @@ header {
   background-color: #562b81;
 }
 
+body {
+  background-color: #f0f0f0;
+}
+
 .textinput * {
   width: 100%;
 }
 
 .savebutton {
   width: 60px;
+  height: 30px;
   background-color: #562b81;
   color: white;
+  border-radius: 4px;
 }
 
 #notesinput {
   height: 100px;
+}
+
+.column-full.button {
+  display: flex;
+  justify-content: flex-end;
+}
+
+label,
+h1,
+button {
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
+  font-weight: 600;
+}
+
+.maintitle {
+  margin-left: 24px;
+}
+
+.entryform {
+  height: 100%;
+  justify-content: space-evenly;
 }
