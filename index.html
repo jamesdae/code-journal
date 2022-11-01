@@ -22,23 +22,26 @@
   <main class="container">
     <div data-view="entry-form" class="row">
       <h1 class="newentry">New Entry</h1>
-      <form action="" class="entryform">
+      <form action="" class="entryform row">
         <div class="column-half">
           <img src="images/placeholder-image-square.jpg" alt="placeholder image">
         </div>
-        <div class="column-half row">
+        <div class="column-half">
           <label for="titleinput">Title</label>
-          <input type="text" name="titleinput" id="titleinput">
-        </div>
-
-        <div class="column-half row">
+          <div class="textinput">
+            <input type="text" name="titleinput" id="titleinput">
+          </div>
           <label for="photoinput">Photo URL</label>
-          <input type="url" name="photoinput" id="photoinput">
+          <div class="textinput">
+            <input type="url" name="photoinput" id="photoinput">
+          </div>
         </div>
 
-        <div class="column-full row">
+        <div class="column-full">
           <label for="notesinput">Notes</label>
-          <textarea name="notesinput" id="notesinput"></textarea>
+          <div class="textinput">
+            <textarea name="notesinput" id="notesinput"></textarea>
+          </div>
         </div>
         <button class="savebutton">SAVE</button>
       </form>
