@@ -19,7 +19,5 @@ $entryForm.addEventListener('submit', function (event) {
   data.entries.unshift(newObject);
   $image.removeAttribute('src');
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
-  var formJSON = JSON.stringify(data);
-  localStorage.setItem('javascript-local-storage', formJSON);
   $entryForm.reset();
 });
