@@ -11,40 +11,39 @@
     integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
     crossorigin="anonymous"
     referrerpolicy="no-referrer" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Proza+Libre&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
   <header>
-    <h1 class="maintitle">Code Journal</h1>
+    <h1 class="column-full maintitle">Code Journal</h1>
   </header>
   <main class="container">
-    <div data-view="entry-form" class="main">
-      <h1 class="newentry">New Entry</h1>
+    <div data-view="entry-form">
+      <h1 class="column-full">New Entry</h1>
       <form action="" class="entryform row">
         <div class="column-half">
-          <img src="images/placeholder-image-square.jpg" alt="placeholder image">
+          <div class="imagediv">
+            <img src="images/placeholder-image-square.jpg" alt="placeholder image">
+          </div>
         </div>
-        <div class="column-half textonimageright">
-          <div class="boxes">
-            <div class="textinput">
-              <label for="titleinput">Title</label>
-              <input required type="text" name="titleinput" id="titleinput">
-            </div>
-            <div class="textinput">
-              <label for="photoinput">Photo URL</label>
-              <input required type="url" name="photoinput" id="photoinput">
-            </div>
+        <div class="column-half">
+          <div class="titleinput">
+            <label for="titleinput">Title</label>
+            <input required type="text" name="titleinput" id="titleinput" class="column-full">
+          </div>
+          <div class="photoinput">
+            <label for="photoinput">Photo URL</label>
+            <input required type="url" name="photoinput" id="photoinput" class="column-full">
           </div>
         </div>
         <div class="notes column-full">
           <label for="notesinput">Notes</label>
-          <div class="textinput">
-            <textarea required name="notesinput" id="notesinput"></textarea>
-          </div>
-        </div>
-        <div class="column-full button">
+          <textarea required name="notesinput" id="notesinput"></textarea>
           <button class="savebutton">SAVE</button>
         </div>
       </form>
