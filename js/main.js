@@ -2,11 +2,17 @@ var $submitPhoto = document.getElementById('photoinput');
 var $image = document.getElementById('entryimg');
 var $entryForm = document.forms[0];
 var $titleInput = document.getElementById('titleinput');
-// var $firstimg = document.getElementById('firstimg');
+
+// lines 8 and 13-14 are temporary
+// img should be set from local storage in data.js
+
+var $firstimg = document.getElementById('firstimg');
 
 $submitPhoto.addEventListener('input', function (event) {
   $image.removeAttribute('src');
   $image.setAttribute('src', event.target.value);
+  $firstimg.removeAttribute('src');
+  $firstimg.setAttribute('src', event.target.value);
 });
 
 $entryForm.addEventListener('submit', function (event) {
