@@ -1,0 +1,61 @@
+label,
+h1,
+button {
+  font-family: "Proza Libre", sans-serif;
+}
+
+img {
+  width: 100%;
+}
+
+header {
+  color: white;
+  background-color: #562b81;
+}
+
+body {
+  background-color: #f0f0f0;
+}
+
+.savebutton {
+  width: 60px;
+  height: 30px;
+  background-color: #562b81;
+  color: white;
+  border-radius: 4px;
+  align-self: flex-end;
+  margin-top: auto;
+}
+
+#notesinput {
+  height: 100px;
+}
+
+.maintitle {
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.notes {
+  height: 160px;
+  display: flex;
+  flex-direction: column;
+}
+
+.imagediv {
+  max-height: 350px;
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.photoinput {
+  margin: 20px 0;
+}
+
+input:focus,
+textarea:focus {
+  outline-color: #562b81;
+}
