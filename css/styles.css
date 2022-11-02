@@ -59,3 +59,7 @@ input:focus,
 textarea:focus {
   outline-color: #562b81;
 }
+
+ul {
+  list-style: none;
+}
