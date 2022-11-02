@@ -1,7 +1,8 @@
 var $submitPhoto = document.getElementById('photoinput');
-var $image = document.querySelector('img');
+var $image = document.getElementById('entryimg');
 var $entryForm = document.forms[0];
 var $titleInput = document.getElementById('titleinput');
+// var $firstimg = document.getElementById('firstimg');
 
 $submitPhoto.addEventListener('input', function (event) {
   $image.removeAttribute('src');
