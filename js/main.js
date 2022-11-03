@@ -4,6 +4,9 @@ var $entryForm = document.forms[0];
 var $titleInput = document.getElementById('titleinput');
 var $entryList = document.querySelector('ul.row');
 
+var $entryClass = document.querySelector('.entry');
+var $entriesClass = document.querySelector('.entries');
+
 $submitPhoto.addEventListener('input', function (event) {
   function isValidUrl(url) {
     try {
@@ -30,6 +33,8 @@ $entryForm.addEventListener('submit', function (event) {
   $image.removeAttribute('src');
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
   $entryList.prepend(preEntry());
+  $entryClass.className = 'entry hidden';
+  $entriesClass.className = 'entries';
   $entryForm.reset();
 });
 
