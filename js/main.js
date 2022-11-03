@@ -1,3 +1,6 @@
+/* global data */
+/* exported data */
+
 var $submitPhoto = document.getElementById('photoinput');
 var $image = document.getElementById('entryimg');
 var $entryForm = document.forms[0];
@@ -52,6 +55,7 @@ function preEntry(entry) {
 
   var $entryimage = document.createElement('img');
   $entryimage.setAttribute('src', document.forms[0].elements.photoinput.value);
+  $entryimage.className = 'imagecontain';
   $imagediv.appendChild($entryimage);
 
   var $secondcolumn = document.createElement('div');
@@ -104,6 +108,7 @@ function renderEntry(entry) {
 
   var $entryimage = document.createElement('img');
   $entryimage.setAttribute('src', entry.photoinput);
+  $entryimage.className = 'imagecontain';
   $imagediv.appendChild($entryimage);
 
   var $secondcolumn = document.createElement('div');

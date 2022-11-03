@@ -4,6 +4,7 @@
 
 img {
   width: 100%;
+  object-fit: contain;
 }
 
 header {
@@ -43,10 +44,7 @@ body {
 
 .imagediv {
   max-height: 350px;
-  width: 100%;
-  overflow: hidden;
   display: flex;
-  align-items: center;
   margin-bottom: 20px;
 }
 
