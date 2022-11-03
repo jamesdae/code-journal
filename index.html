@@ -19,11 +19,13 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header class="row">
-    <h1 class="maintitle">Code Journal</h1>
-    <nav class="row">
-      <a href="index.html">Entries</a>
-    </nav>
+  <header class="column-full">
+    <div class="container row">
+      <h1 class="maintitle">Code Journal</h1>
+      <nav class="row">
+        <a href="#" id="entrynav">Entries</a>
+      </nav>
+    </div>
   </header>
   <main class="container">
     <div data-view="entry-form" class="entry hidden">
@@ -47,14 +49,17 @@
         <div class="notes column-full">
           <label for="notesinput">Notes</label>
           <textarea required name="notesinput" id="notesinput"></textarea>
-          <button class="savebutton">SAVE</button>
+          <button class="button">SAVE</button>
         </div>
       </form>
     </div>
     <div data-view="entries" class="entries">
       <div class="column-full row">
         <h1>Entries</h1>
-        <button class="savebutton new">NEW</button>
+        <a href="#" class="button new">NEW</a>
+      </div>
+      <div class="column-full temp">
+        <p>No entries have been recorded.</p>
       </div>
       <ul class="row">
       </ul>

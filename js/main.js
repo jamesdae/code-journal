@@ -3,7 +3,7 @@ var $image = document.getElementById('entryimg');
 var $entryForm = document.forms[0];
 var $titleInput = document.getElementById('titleinput');
 var $entryList = document.querySelector('ul.row');
-
+var $temp = document.querySelector('.temp');
 var $entryClass = document.querySelector('.entry');
 var $entriesClass = document.querySelector('.entries');
 
@@ -33,8 +33,8 @@ $entryForm.addEventListener('submit', function (event) {
   $image.removeAttribute('src');
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
   $entryList.prepend(preEntry());
-  $entryClass.classList.add('hidden');
-  $entriesClass.classList.remove('hidden');
+  $temp.classList.add('hidden');
+  hideform();
   $entryForm.reset();
 });
 
@@ -75,7 +75,17 @@ function preEntry(entry) {
 }
 
 var $newButton = document.querySelector('.new');
-$newButton.addEventListener('click', function (event) {
+$newButton.addEventListener('click', hideEntries);
+
+var $entrynav = document.getElementById('entrynav');
+$entrynav.addEventListener('click', hideform);
+
+function hideform() {
+  $entryClass.classList.add('hidden');
+  $entriesClass.classList.remove('hidden');
+}
+
+function hideEntries() {
   $entryClass.classList.remove('hidden');
   $entriesClass.classList.add('hidden');
-});
+}

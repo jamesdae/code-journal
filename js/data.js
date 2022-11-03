@@ -8,9 +8,11 @@ var data = {
 };
 
 var previousdataJSON = localStorage.getItem('javascript-local-storage');
+var $temp = document.querySelector('.temp');
 
 if (previousdataJSON !== null) {
   data = JSON.parse(previousdataJSON);
+  $temp.classList.add('hidden');
 }
 
 window.addEventListener('beforeunload', function (event) {
