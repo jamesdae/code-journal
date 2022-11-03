@@ -33,8 +33,8 @@ $entryForm.addEventListener('submit', function (event) {
   $image.removeAttribute('src');
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
   $entryList.prepend(preEntry());
-  $entryClass.className = 'entry hidden';
-  $entriesClass.className = 'entries';
+  $entryClass.classList.add('hidden');
+  $entriesClass.classList.remove('hidden');
   $entryForm.reset();
 });
 
@@ -73,3 +73,9 @@ function preEntry(entry) {
   $textDiv.appendChild($entrytext);
   return $entryLi;
 }
+
+var $newButton = document.querySelector('.new');
+$newButton.addEventListener('click', function (event) {
+  $entryClass.classList.remove('hidden');
+  $entriesClass.classList.add('hidden');
+});
