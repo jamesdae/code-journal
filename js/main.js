@@ -129,5 +129,7 @@ function showView(string) {
 $entryList.addEventListener('click', function (event) {
   if (event.target.classList.contains('fa-pencil')) {
     showForm();
+    var targetId = event.target.parentNode.parentNode.parentNode.parentNode.getAttribute('data-entry-id');
+    data.editing = targetId;
   }
 });
