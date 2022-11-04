@@ -9,6 +9,8 @@ var $entryList = document.querySelector('ul.row');
 var $temp = document.querySelector('.temp');
 var $entryClass = document.querySelector('.entry');
 var $entriesClass = document.querySelector('.entries');
+var $notesinput = document.getElementById('notesinput');
+var $editHeading = document.querySelector('.entry > h1');
 
 $submitPhoto.addEventListener('input', function (event) {
   function isValidUrl(url) {
@@ -42,7 +44,16 @@ $entryForm.addEventListener('submit', function (event) {
 });
 
 var $newButton = document.querySelector('.new');
-$newButton.addEventListener('click', showForm);
+$newButton.addEventListener('click', function () {
+  if (data.editing === null) {
+    $image.setAttribute('src', 'images/placeholder-image-square.jpg');
+    $submitPhoto.removeAttribute('value');
+    $titleInput.removeAttribute('value');
+    $notesinput.innerText = null;
+    $editHeading.innerText = 'New Entry';
+  }
+  showForm();
+});
 
 var $entrynav = document.getElementById('entrynav');
 $entrynav.addEventListener('click', showEntries);
@@ -133,8 +144,16 @@ $entryList.addEventListener('click', function (event) {
     var targetLi = event.target.closest('li');
     var targetId = targetLi.getAttribute('data-entry-id');
     var targetSrc = targetLi.querySelector('img').getAttribute('src');
+    var targetTitle = targetLi.querySelector('.entryheading').innerText;
+    var targetNotes = targetLi.querySelector('.entrytext').innerText;
     data.editing = targetId;
     $image.setAttribute('src', targetSrc);
+    $submitPhoto.setAttribute('value', targetSrc);
+    $titleInput.setAttribute('value', targetTitle);
+    $notesinput.innerText = targetNotes;
+    $editHeading.innerText = 'Edit Entry';
     // console.log(event.target.closest('li').querySelector('img'));
   }
 });
+
+// thinking that i should change the new button click event to show form running ^^^^ function but defined with a name instead.
