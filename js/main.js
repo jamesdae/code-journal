@@ -35,63 +35,34 @@ $entryForm.addEventListener('submit', function (event) {
   data.entries.unshift(newObject);
   $image.removeAttribute('src');
   $image.setAttribute('src', 'images/placeholder-image-square.jpg');
-  $entryList.prepend(preEntry());
-  $temp.classList.add('hidden');
-  hideform();
+  $entryList.prepend(renderEntry(newObject));
   $entryForm.reset();
+  $temp.classList.add('hidden');
+  showEntries();
 });
 
-function preEntry(entry) {
-  var $entryLi = document.createElement('li');
-  $entryLi.setAttribute('class', 'row');
-
-  var $firstcolumn = document.createElement('div');
-  $firstcolumn.setAttribute('class', 'column-half');
-  $entryLi.appendChild($firstcolumn);
-
-  var $imagediv = document.createElement('div');
-  $imagediv.setAttribute('class', 'imagediv');
-  $firstcolumn.appendChild($imagediv);
-
-  var $entryimage = document.createElement('img');
-  $entryimage.setAttribute('src', document.forms[0].elements.photoinput.value);
-  $entryimage.className = 'imagecontain';
-  $imagediv.appendChild($entryimage);
-
-  var $secondcolumn = document.createElement('div');
-  $secondcolumn.setAttribute('class', 'column-half');
-  $entryLi.appendChild($secondcolumn);
-
-  var $textDiv = document.createElement('div');
-  $textDiv.setAttribute('class', 'textdiv');
-  $secondcolumn.appendChild($textDiv);
-
-  var $entryheading = document.createElement('h2');
-  $entryheading.setAttribute('class', 'entryheading');
-  $entryheading.textContent = $titleInput.value;
-  $textDiv.appendChild($entryheading);
-
-  var $entrytext = document.createElement('p');
-  $entrytext.setAttribute('class', 'entrytext');
-  $entrytext.innerText = document.forms[0].elements.notesinput.value;
-  $textDiv.appendChild($entrytext);
-  return $entryLi;
-}
-
 var $newButton = document.querySelector('.new');
-$newButton.addEventListener('click', hideEntries);
+$newButton.addEventListener('click', showForm);
 
 var $entrynav = document.getElementById('entrynav');
-$entrynav.addEventListener('click', hideform);
+$entrynav.addEventListener('click', showEntries);
 
-function hideform() {
+function showEntries() {
+  $entryClass.classList.remove('shown');
   $entryClass.classList.add('hidden');
   $entriesClass.classList.remove('hidden');
+  $entriesClass.classList.add('shown');
+  data.view = 'entries';
+  showView(data.view);
 }
 
-function hideEntries() {
+function showForm() {
+  $entriesClass.classList.remove('shown');
   $entryClass.classList.remove('hidden');
   $entriesClass.classList.add('hidden');
+  $entryClass.classList.add('shown');
+  data.view = 'entry-form';
+  showView(data.view);
 }
 
 function renderEntry(entry) {
@@ -134,7 +105,16 @@ function renderEntry(entry) {
 window.addEventListener('DOMContentLoaded', function (event) {
   for (var i = 0; i < data.entries.length; i++) {
     $entryList.appendChild(renderEntry(data.entries[i]));
-    var $temp = document.querySelector('.temp');
     $temp.classList.add('hidden');
   }
+  showView(data.view);
 });
+
+function showView(string) {
+  data.view = string;
+  if (string === 'entry-form') {
+    showForm();
+  } else {
+    showEntries();
+  }
+}
