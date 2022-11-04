@@ -53,9 +53,10 @@ function showEntries() {
   $entriesClass.classList.remove('hidden');
   $entriesClass.classList.add('shown');
   data.view = 'entries';
+  data.editing = null;
 }
 
-function showForm() {
+function showForm(event) {
   $entriesClass.classList.remove('shown');
   $entryClass.classList.remove('hidden');
   $entriesClass.classList.add('hidden');
@@ -128,8 +129,12 @@ function showView(string) {
 
 $entryList.addEventListener('click', function (event) {
   if (event.target.classList.contains('fa-pencil')) {
-    showForm();
-    var targetId = event.target.parentNode.parentNode.parentNode.parentNode.getAttribute('data-entry-id');
+    showForm(event.target.closest('li'));
+    var targetLi = event.target.closest('li');
+    var targetId = targetLi.getAttribute('data-entry-id');
+    var targetSrc = targetLi.querySelector('img').getAttribute('src');
     data.editing = targetId;
+    $image.setAttribute('src', targetSrc);
+    // console.log(event.target.closest('li').querySelector('img'));
   }
 });
