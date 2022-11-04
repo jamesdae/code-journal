@@ -53,7 +53,6 @@ function showEntries() {
   $entriesClass.classList.remove('hidden');
   $entriesClass.classList.add('shown');
   data.view = 'entries';
-  showView(data.view);
 }
 
 function showForm() {
@@ -62,12 +61,12 @@ function showForm() {
   $entriesClass.classList.add('hidden');
   $entryClass.classList.add('shown');
   data.view = 'entry-form';
-  showView(data.view);
 }
 
 function renderEntry(entry) {
   var $entryLi = document.createElement('li');
   $entryLi.setAttribute('class', 'row');
+  $entryLi.setAttribute('data-entry-id', entry.entryId);
 
   var $firstcolumn = document.createElement('div');
   $firstcolumn.setAttribute('class', 'column-half');
@@ -90,10 +89,18 @@ function renderEntry(entry) {
   $textDiv.setAttribute('class', 'textdiv');
   $secondcolumn.appendChild($textDiv);
 
+  var $titlerow = document.createElement('div');
+  $titlerow.setAttribute('class', 'titlerow row');
+  $textDiv.appendChild($titlerow);
+
   var $entryheading = document.createElement('h2');
   $entryheading.setAttribute('class', 'entryheading');
   $entryheading.textContent = entry.titleinput;
-  $textDiv.appendChild($entryheading);
+  $titlerow.appendChild($entryheading);
+
+  var $editbutton = document.createElement('i');
+  $editbutton.setAttribute('class', 'fa-solid fa-pencil');
+  $titlerow.appendChild($editbutton);
 
   var $entrytext = document.createElement('p');
   $entrytext.setAttribute('class', 'entrytext');
@@ -118,3 +125,9 @@ function showView(string) {
     showEntries();
   }
 }
+
+$entryList.addEventListener('click', function (event) {
+  if (event.target.classList.contains('fa-pencil')) {
+    showForm();
+  }
+});
