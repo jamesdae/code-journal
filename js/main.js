@@ -32,12 +32,23 @@ $entryForm.addEventListener('submit', function (event) {
   newObject.titleinput = $titleInput.value;
   newObject.photoinput = document.forms[0].elements.photoinput.value;
   newObject.notesinput = document.forms[0].elements.notesinput.value;
-  newObject.entryId = data.nextEntryId;
-  data.nextEntryId += 1;
-  data.entries.unshift(newObject);
-  $image.removeAttribute('src');
-  $image.setAttribute('src', 'images/placeholder-image-square.jpg');
-  $entryList.prepend(renderEntry(newObject));
+
+  if (data.editing !== null) {
+    newObject.entryId = data.editing.entryId;
+    var oldEntries = $entryList.querySelectorAll('li');
+
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === newObject.entryId) {
+        data.entries[i] = newObject;
+        oldEntries[i].replaceWith(renderEntry(newObject));
+      }
+    }
+  } else {
+    newObject.entryId = data.nextEntryId;
+    data.nextEntryId += 1;
+    data.entries.unshift(newObject);
+    $entryList.prepend(renderEntry(newObject));
+  }
   $entryForm.reset();
   $temp.classList.add('hidden');
   showEntries();
@@ -140,20 +151,23 @@ function showView(string) {
 
 $entryList.addEventListener('click', function (event) {
   if (event.target.classList.contains('fa-pencil')) {
-    showForm(event.target.closest('li'));
+    showForm();
     var targetLi = event.target.closest('li');
     var targetId = targetLi.getAttribute('data-entry-id');
     var targetSrc = targetLi.querySelector('img').getAttribute('src');
     var targetTitle = targetLi.querySelector('.entryheading').innerText;
     var targetNotes = targetLi.querySelector('.entrytext').innerText;
-    data.editing = targetId;
     $image.setAttribute('src', targetSrc);
     $submitPhoto.setAttribute('value', targetSrc);
     $titleInput.setAttribute('value', targetTitle);
     $notesinput.innerText = targetNotes;
     $editHeading.innerText = 'Edit Entry';
-    // console.log(event.target.closest('li').querySelector('img'));
+    for (var i = 0; i < data.entries.length; i++) {
+      if ((data.entries[i].entryId) === +targetId) {
+        data.editing = data.entries[i];
+      }
+    }
   }
 });
 
-// thinking that i should change the new button click event to show form running ^^^^ function but defined with a name instead.
+// left off on line 44 where it seems i cant target the correct li node because it has to be the one that has the corresponding id number
