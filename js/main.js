@@ -32,11 +32,9 @@ $entryForm.addEventListener('submit', function (event) {
   newObject.titleinput = $titleInput.value;
   newObject.photoinput = document.forms[0].elements.photoinput.value;
   newObject.notesinput = document.forms[0].elements.notesinput.value;
-
   if (data.editing !== null) {
     newObject.entryId = data.editing.entryId;
     var oldEntries = $entryList.querySelectorAll('li');
-
     for (var i = 0; i < data.entries.length; i++) {
       if (data.entries[i].entryId === newObject.entryId) {
         data.entries[i] = newObject;
@@ -169,5 +167,3 @@ $entryList.addEventListener('click', function (event) {
     }
   }
 });
-
-// left off on line 44 where it seems i cant target the correct li node because it has to be the one that has the corresponding id number
