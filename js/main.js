@@ -9,6 +9,8 @@ var $entryList = document.querySelector('ul.row');
 var $temp = document.querySelector('.temp');
 var $entryClass = document.querySelector('.entry');
 var $entriesClass = document.querySelector('.entries');
+var $notesinput = document.getElementById('notesinput');
+var $editHeading = document.querySelector('.entry > h1');
 
 $submitPhoto.addEventListener('input', function (event) {
   function isValidUrl(url) {
@@ -30,19 +32,37 @@ $entryForm.addEventListener('submit', function (event) {
   newObject.titleinput = $titleInput.value;
   newObject.photoinput = document.forms[0].elements.photoinput.value;
   newObject.notesinput = document.forms[0].elements.notesinput.value;
-  newObject.entryId = data.nextEntryId;
-  data.nextEntryId += 1;
-  data.entries.unshift(newObject);
-  $image.removeAttribute('src');
-  $image.setAttribute('src', 'images/placeholder-image-square.jpg');
-  $entryList.prepend(renderEntry(newObject));
+  if (data.editing !== null) {
+    newObject.entryId = data.editing.entryId;
+    var oldEntries = $entryList.querySelectorAll('li');
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].entryId === newObject.entryId) {
+        data.entries[i] = newObject;
+        oldEntries[i].replaceWith(renderEntry(newObject));
+      }
+    }
+  } else {
+    newObject.entryId = data.nextEntryId;
+    data.nextEntryId += 1;
+    data.entries.unshift(newObject);
+    $entryList.prepend(renderEntry(newObject));
+  }
   $entryForm.reset();
   $temp.classList.add('hidden');
   showEntries();
 });
 
 var $newButton = document.querySelector('.new');
-$newButton.addEventListener('click', showForm);
+$newButton.addEventListener('click', function () {
+  if (data.editing === null) {
+    $image.setAttribute('src', 'images/placeholder-image-square.jpg');
+    $submitPhoto.removeAttribute('value');
+    $titleInput.removeAttribute('value');
+    $notesinput.innerText = null;
+    $editHeading.innerText = 'New Entry';
+  }
+  showForm();
+});
 
 var $entrynav = document.getElementById('entrynav');
 $entrynav.addEventListener('click', showEntries);
@@ -53,21 +73,21 @@ function showEntries() {
   $entriesClass.classList.remove('hidden');
   $entriesClass.classList.add('shown');
   data.view = 'entries';
-  showView(data.view);
+  data.editing = null;
 }
 
-function showForm() {
+function showForm(event) {
   $entriesClass.classList.remove('shown');
   $entryClass.classList.remove('hidden');
   $entriesClass.classList.add('hidden');
   $entryClass.classList.add('shown');
   data.view = 'entry-form';
-  showView(data.view);
 }
 
 function renderEntry(entry) {
   var $entryLi = document.createElement('li');
   $entryLi.setAttribute('class', 'row');
+  $entryLi.setAttribute('data-entry-id', entry.entryId);
 
   var $firstcolumn = document.createElement('div');
   $firstcolumn.setAttribute('class', 'column-half');
@@ -90,10 +110,18 @@ function renderEntry(entry) {
   $textDiv.setAttribute('class', 'textdiv');
   $secondcolumn.appendChild($textDiv);
 
+  var $titlerow = document.createElement('div');
+  $titlerow.setAttribute('class', 'titlerow row');
+  $textDiv.appendChild($titlerow);
+
   var $entryheading = document.createElement('h2');
   $entryheading.setAttribute('class', 'entryheading');
   $entryheading.textContent = entry.titleinput;
-  $textDiv.appendChild($entryheading);
+  $titlerow.appendChild($entryheading);
+
+  var $editbutton = document.createElement('i');
+  $editbutton.setAttribute('class', 'fa-solid fa-pencil');
+  $titlerow.appendChild($editbutton);
 
   var $entrytext = document.createElement('p');
   $entrytext.setAttribute('class', 'entrytext');
@@ -118,3 +146,24 @@ function showView(string) {
     showEntries();
   }
 }
+
+$entryList.addEventListener('click', function (event) {
+  if (event.target.classList.contains('fa-pencil')) {
+    showForm();
+    var targetLi = event.target.closest('li');
+    var targetId = targetLi.getAttribute('data-entry-id');
+    var targetSrc = targetLi.querySelector('img').getAttribute('src');
+    var targetTitle = targetLi.querySelector('.entryheading').innerText;
+    var targetNotes = targetLi.querySelector('.entrytext').innerText;
+    $image.setAttribute('src', targetSrc);
+    $submitPhoto.setAttribute('value', targetSrc);
+    $titleInput.setAttribute('value', targetTitle);
+    $notesinput.innerText = targetNotes;
+    $editHeading.innerText = 'Edit Entry';
+    for (var i = 0; i < data.entries.length; i++) {
+      if ((data.entries[i].entryId) === +targetId) {
+        data.editing = data.entries[i];
+      }
+    }
+  }
+});

@@ -81,3 +81,7 @@ a {
 .temp {
   text-align: center;
 }
+
+.titlerow {
+  justify-content: space-between;
+}
