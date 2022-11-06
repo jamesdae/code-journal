@@ -218,6 +218,10 @@ function showModal(event) {
       }
     }
     removeModal();
+    if ($entryList.innerText === '') {
+      $temp.classList.remove('hidden');
+    }
+
   });
 }
 
