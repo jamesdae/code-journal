@@ -11,6 +11,7 @@ var $entryClass = document.querySelector('.entry');
 var $entriesClass = document.querySelector('.entries');
 var $notesinput = document.getElementById('notesinput');
 var $editHeading = document.querySelector('.entry > h1');
+var $deleteLink = document.querySelector('a.deletelink');
 
 $submitPhoto.addEventListener('input', function (event) {
   function isValidUrl(url) {
@@ -60,6 +61,9 @@ $newButton.addEventListener('click', function () {
     $titleInput.removeAttribute('value');
     $notesinput.innerText = null;
     $editHeading.innerText = 'New Entry';
+  }
+  if (!$deleteLink.classList.contains('hidden')) {
+    $deleteLink.classList.add('hidden');
   }
   showForm();
 });
@@ -160,6 +164,7 @@ $entryList.addEventListener('click', function (event) {
     $titleInput.setAttribute('value', targetTitle);
     $notesinput.innerText = targetNotes;
     $editHeading.innerText = 'Edit Entry';
+    $deleteLink.classList.remove('hidden');
     for (var i = 0; i < data.entries.length; i++) {
       if ((data.entries[i].entryId) === +targetId) {
         data.editing = data.entries[i];
@@ -167,3 +172,38 @@ $entryList.addEventListener('click', function (event) {
     }
   }
 });
+
+function showModal(event) {
+  var $deleteModal = document.createElement('div');
+  $deleteModal.setAttribute('class', 'modal column-full');
+
+  var $popUp = document.createElement('div');
+  $popUp.setAttribute('class', 'popup row');
+  $deleteModal.appendChild($popUp);
+
+  // var $box = document.createElement('div');
+  // $box.setAttribute('class', 'row');
+  // $popUp.appendChild($box);
+
+  var $modaltext = document.createElement('div');
+  $modaltext.setAttribute('class', 'modaltext column-full');
+  $popUp.appendChild($modaltext);
+
+  var $deleteText = document.createElement('p');
+  $deleteText.innerText = 'Are you sure you want to delete this entry?';
+  $modaltext.appendChild($deleteText);
+
+  var $cancelButton = document.createElement('button');
+  $cancelButton.setAttribute('class', 'cancel');
+  $cancelButton.innerText = 'CANCEL';
+  $popUp.appendChild($cancelButton);
+
+  var $confirmButton = document.createElement('button');
+  $confirmButton.setAttribute('class', 'confirm');
+  $confirmButton.innerText = 'CONFIRM';
+  $popUp.appendChild($confirmButton);
+
+  $entryClass.appendChild($deleteModal);
+}
+
+$deleteLink.addEventListener('click', showModal);
