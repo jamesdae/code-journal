@@ -205,6 +205,11 @@ function showModal(event) {
   $popUp.appendChild($confirmButton);
 
   $entryClass.appendChild($deleteModal);
+
+  $cancelButton.addEventListener('click', function (event) {
+    $entryClass.removeChild($deleteModal);
+  });
+
 }
 
 $deleteLink.addEventListener('click', showModal);
