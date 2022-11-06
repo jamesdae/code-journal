@@ -53,6 +53,9 @@ $entryForm.addEventListener('submit', function (event) {
   showEntries();
 });
 
+var $entrynav = document.getElementById('entrynav');
+$entrynav.addEventListener('click', showEntries);
+
 var $newButton = document.querySelector('.new');
 $newButton.addEventListener('click', function () {
   if (data.editing === null) {
@@ -67,9 +70,6 @@ $newButton.addEventListener('click', function () {
   }
   showForm();
 });
-
-var $entrynav = document.getElementById('entrynav');
-$entrynav.addEventListener('click', showEntries);
 
 function showEntries() {
   $entryClass.classList.remove('shown');
@@ -181,10 +181,6 @@ function showModal(event) {
   $popUp.setAttribute('class', 'popup row');
   $deleteModal.appendChild($popUp);
 
-  // var $box = document.createElement('div');
-  // $box.setAttribute('class', 'row');
-  // $popUp.appendChild($box);
-
   var $modaltext = document.createElement('div');
   $modaltext.setAttribute('class', 'modaltext column-full');
   $popUp.appendChild($modaltext);
@@ -206,10 +202,23 @@ function showModal(event) {
 
   $entryClass.appendChild($deleteModal);
 
-  $cancelButton.addEventListener('click', function (event) {
+  function removeModal() {
     $entryClass.removeChild($deleteModal);
-  });
+  }
 
+  $cancelButton.addEventListener('click', removeModal);
+
+  $confirmButton.addEventListener('click', function (event) {
+    var oldEntries = $entryList.querySelectorAll('li');
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.editing.entryId === data.entries[i].entryId) {
+        data.entries.splice(i);
+        $entryList.removeChild(oldEntries[i]);
+        showEntries();
+      }
+    }
+    removeModal();
+  });
 }
 
 $deleteLink.addEventListener('click', showModal);
