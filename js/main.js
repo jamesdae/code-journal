@@ -191,15 +191,16 @@ function showModal(event) {
 
   var $deleteText = document.createElement('p');
   $deleteText.innerText = 'Are you sure you want to delete this entry?';
+  $deleteText.setAttribute('class', 'cancelp');
   $modaltext.appendChild($deleteText);
 
   var $cancelButton = document.createElement('button');
-  $cancelButton.setAttribute('class', 'cancel');
+  $cancelButton.setAttribute('class', 'cancel modalbutton');
   $cancelButton.innerText = 'CANCEL';
   $popUp.appendChild($cancelButton);
 
   var $confirmButton = document.createElement('button');
-  $confirmButton.setAttribute('class', 'confirm');
+  $confirmButton.setAttribute('class', 'confirm modalbutton');
   $confirmButton.innerText = 'CONFIRM';
   $popUp.appendChild($confirmButton);
 
