@@ -39,7 +39,8 @@ body {
 .notes {
   height: 160px;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .imagediv {
@@ -84,4 +85,60 @@ a {
 
 .titlerow {
   justify-content: space-between;
+}
+
+a.deletelink {
+  color: red;
+  text-decoration: underline;
+}
+
+label.column-full {
+  padding: 0;
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgb(50 50 50 / 80%);
+}
+
+.popup {
+  align-items: center;
+  justify-content: space-around;
+  height: 125px;
+  background-color: white;
+  border-radius: 5px;
+  font-weight: bolder;
+  max-width: 90%;
+}
+
+.cancelp {
+  text-align: center;
+  margin: 15px 0 0;
+}
+
+.modalbutton {
+  width: 80px;
+  height: 30px;
+  border-radius: 4px;
+  border-style: none;
+}
+
+.cancel {
+  background-color: #b6b6b6;
+}
+
+.confirm {
+  background-color: #dc2626;
+  color: white;
+}
+
+li {
+  width: 100%;
 }
