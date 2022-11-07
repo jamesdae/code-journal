@@ -68,6 +68,7 @@ $newButton.addEventListener('click', function () {
   if (!$deleteLink.classList.contains('hidden')) {
     $deleteLink.classList.add('hidden');
   }
+  $entryForm.reset();
   showForm();
 });
 
@@ -229,7 +230,6 @@ function showModal(event) {
     if ($entryList.innerText === '') {
       $temp.classList.remove('hidden');
     }
-
   });
 }
 
