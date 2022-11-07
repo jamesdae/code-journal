@@ -146,6 +146,14 @@ function showView(string) {
   data.view = string;
   if (string === 'entry-form') {
     showForm();
+    if (data.editing !== null) {
+      $image.setAttribute('src', data.editing.photoinput);
+      $submitPhoto.setAttribute('value', data.editing.photoinput);
+      $titleInput.setAttribute('value', data.editing.titleinput);
+      $notesinput.innerText = data.editing.notesinput;
+      $editHeading.innerText = 'Edit Entry';
+      $deleteLink.classList.remove('hidden');
+    }
   } else {
     showEntries();
   }
@@ -212,7 +220,7 @@ function showModal(event) {
     var oldEntries = $entryList.querySelectorAll('li');
     for (var i = 0; i < data.entries.length; i++) {
       if (data.editing.entryId === data.entries[i].entryId) {
-        data.entries.splice(i);
+        data.entries.splice(i, 1);
         $entryList.removeChild(oldEntries[i]);
         showEntries();
       }
