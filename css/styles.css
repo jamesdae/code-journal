@@ -112,10 +112,10 @@ label.column-full {
   align-items: center;
   justify-content: space-around;
   height: 125px;
-  width: 90%;
   background-color: white;
   border-radius: 5px;
   font-weight: bolder;
+  max-width: 90%;
 }
 
 .cancelp {
@@ -137,4 +137,8 @@ label.column-full {
 .confirm {
   background-color: #dc2626;
   color: white;
+}
+
+li {
+  width: 100%;
 }

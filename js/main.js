@@ -178,7 +178,7 @@ function showModal(event) {
   $deleteModal.setAttribute('class', 'modal column-full');
 
   var $popUp = document.createElement('div');
-  $popUp.setAttribute('class', 'popup row');
+  $popUp.setAttribute('class', 'popup column-half row');
   $deleteModal.appendChild($popUp);
 
   var $modaltext = document.createElement('div');
